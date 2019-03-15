@@ -1,8 +1,8 @@
 # Stack Overflow: Tag Prediction
 
 
-# 1. Business Problem
-## 1.1 Description
+#  Business Problem
+##  Description
 
 Description
 
@@ -14,21 +14,21 @@ Problem Statemtent
 Suggest the tags based on the content that was there in the question posted on Stackoverflow.
 
 Source: https://www.kaggle.com/c/facebook-recruiting-iii-keyword-extraction/
-## 1.2 Source / useful links
+##  Source / useful links
 
 Data Source : https://www.kaggle.com/c/facebook-recruiting-iii-keyword-extraction/data
 Youtube : https://youtu.be/nNDqbUhtIRg
 Research paper : https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/tagging-1.pdf
 Research paper : https://dl.acm.org/citation.cfm?id=2660970&dl=ACM&coll=DL
-## 1.3 Real World / Business Objectives and Constraints
+## Real World / Business Objectives and Constraints
 
     Predict as many tags as possible with high precision and recall.
     Incorrect tags could impact customer experience on StackOverflow.
     No strict latency constraints.
 
-# 2. Machine Learning problem
-## 2.1 Data
-### 2.1.1 Data Overview
+#  Machine Learning problem
+##  Data
+###  Data Overview
 
 Refer: https://www.kaggle.com/c/facebook-recruiting-iii-keyword-extraction/data
 All of the data is in 2 files: Train and Test.
@@ -60,13 +60,13 @@ Tags - The tags associated with the question in a space-seperated format (all lo
 
 
 
-## 2.2 Mapping the real-world problem to a Machine Learning Problem
-### 2.2.1 Type of Machine Learning Problem
+## Mapping the real-world problem to a Machine Learning Problem
+###  Type of Machine Learning Problem
 
 It is a multi-label classification problem
 Multi-label Classification: Multilabel classification assigns to each sample a set of target labels. This can be thought as predicting properties of a data-point that are not mutually exclusive, such as topics that are relevant for a document. A question on Stackoverflow might be about any of C, Pointers, FileIO and/or memory-management at the same time or none of these.
 __Credit__: http://scikit-learn.org/stable/modules/multiclass.html
-### 2.2.2 Performance metric
+### Performance metric
 
 Micro-Averaged F1-Score (Mean F Score) : The F1 score can be interpreted as a weighted average of the precision and recall, where an F1 score reaches its best value at 1 and worst score at 0. The relative contribution of precision and recall to the F1 score are equal. The formula for the F1 score is:
 
@@ -85,16 +85,16 @@ http://scikit-learn.org/stable/modules/generated/sklearn.metrics.f1_score.html
 
 Hamming loss : The Hamming loss is the fraction of labels that are incorrectly predicted.
 https://www.kaggle.com/wiki/HammingLoss
-## 3. Exploratory Data Analysis
-## 3.1 Data Loading and Cleaning
-### 3.1.1 Using Pandas with SQLite to Load the data
-### 3.1.2 Counting the number of rows 
+##  Exploratory Data Analysis
+## Data Loading and Cleaning
+### Using Pandas with SQLite to Load the data
+### Counting the number of rows 
 
-### 3.1.3 Checking for duplicates
+###  Checking for duplicates
 
-## 3.2 Analysis of Tags
-### 3.2.1 Total number of unique tags
-### 3.2.3 Number of times a tag appeared 
+##  Analysis of Tags
+### Total number of unique tags
+### Number of times a tag appeared 
 
 
 Observations:
@@ -104,7 +104,7 @@ Observations:
     3.Most frequent tag (i.e. c#) is used 331505 times.
     4.Since some tags occur much more frequenctly than others, Micro-averaged F1-score is the appropriate metric for this probelm.
 
-### 3.2.4 Tags Per Question
+###  Tags Per Question
 
 
 Observations:
@@ -113,10 +113,10 @@ Observations:
     2.Minimum number of tags per question: 1
     3.Avg. number of tags per question: 2.899
     4.Most of the questions are having 2 or 3 tags
-### 3.2.5 Most Frequent Tags 
+###  Most Frequent Tags 
 Observations:
 A look at the word cloud shows that "c#", "java", "php", "asp.net", "javascript", "c++" are some of the most frequent tags
-### 3.2.6 The top 20 tags 
+###  The top 20 tags 
 
 
 Observations:
@@ -125,8 +125,8 @@ Observations:
     C# is the top most frequent programming language.
     Android, IOS, Linux and windows are among the top most frequent operating systems.
 
-## 3.3 Cleaning and preprocessing of Questions
-### 3.3.1 Preprocessing
+##  Cleaning and preprocessing of Questions
+### Preprocessing
 
     Sample 1M data points
     Separate out code-snippets from Body
@@ -137,22 +137,22 @@ Observations:
     Use SnowballStemmer to stem the words
 
 
-# 4. Machine Learning Models
-## 4.1 Converting tags for multilabel problems
+# Machine Learning Models
+##  Converting tags for multilabel problems
 We will sample the number of tags instead considering all of them (due to limitation of computing power) 
 
 
 We consider top 15% tags which covers 99% of the questions
-## 4.2 Split the data into test and train (80:20)
-## 4.3 Featurizing data 
-## 4.4 Applying Logistic Regression with OneVsRest Classifier
+## Split the data into test and train (80:20)
+##  Featurizing data 
+##  Applying Logistic Regression with OneVsRest Classifier
 Accuracy : 0.254075
 Hamming loss  0.0026348
 Micro-average quality numbers
 Precision: 0.7746, Recall: 0.5370, F1-measure: 0.6343
 Macro-average quality numbers
 Precision: 0.2615, Recall: 0.1673, F1-measure: 0.1787
-## 4.5 Linear SVM with OneVsRestClassifier
+##  Linear SVM with OneVsRestClassifier
 Accuracy : 0.226225
 Hamming loss  0.00282655
 Micro-average quality numbers
